@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Header = () => {
-  return (<Header>
+  return (<div>
   <h1>قائمة المهام</h1>
-  </Header>);
+  </div>);
 };
 
 export default Header;

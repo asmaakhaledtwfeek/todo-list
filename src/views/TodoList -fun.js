@@ -1,28 +1,38 @@
-import React, { useState } from "react";
+import React, { useState,Component } from "react";
 
 import Todos from "../components/todos/Todos";
 import TodosForm from "../components/todos/TodosForm";
 
-const TodoList = () => {
+class TodoList extends Component  {
   // const initialState = [
   //   { id: 1, title: "شراء مستلزمات", done: false },
   //   { id: 2, title: "شراء منتجات", done: true },
   //   { id: 3, title: "مشاهدة الكورس", done: false },
   //   { id: 4, title: "كتابة الكود", done: true },
   // ];
-  const initialState = localStorage.getItem("todos")
+   initialState = localStorage.getItem("todos")
     ? JSON.parse(localStorage.getItem("todos"))
     : [];
+  state={
+    todos:this.initialState,
+    activeTodo:{},
+    mode:"add",
 
-  const [todos, setTodos] = useState(initialState);
-  const [activeTodo, setActiveTodo] = useState({});
-  // mode => add || not-done || edit
-  const [mode, setMode] = useState("add");
-
+  }
+  render(){
+    let {todos,activeTodo,mode}=this.state;
   const setToLocal = (todos) => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
-
+  const setTodos=(todos)=>{
+    this.setState({todos})
+  }
+  const setActiveTodo=(todo)=>{
+    this.setState({activeTodo:todo})
+  }
+  const setMode =(mode)=>{
+    this.setState({mode})
+  }
   const changeTodoCompletion = (id) => {
     const curTodos = [...todos];
     const newTodos = curTodos.map((el) => {
@@ -108,6 +118,7 @@ const TodoList = () => {
       </div>
     </main>
   );
+  }
 };
 
 export default TodoList;
